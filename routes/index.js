@@ -47,7 +47,7 @@ function controllerRouting(app) {
 
   // Files Controller
 
-  // should create a new file in DB and in disk
+  // New route for file uploads
   router.post('/files', (req, res) => {
     FilesController.postUpload(req, res);
   });
