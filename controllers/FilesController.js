@@ -170,17 +170,6 @@ class FilesController {
 
   /**
    * Should return the content of the file document based on the ID
-   *
-   * If no file document is linked to the ID passed as parameter, return an error
-   * Not found with a status code 404
-   * If the file document (folder or file) is not public (isPublic: false) and no user
-   * authenticate or not the owner of the
-   * file, return an error Not found with a status code 404
-   * If the type of the file document is folder, return an error A folder doesn't have content
-   * with a status code 400
-   * If the file is not locally present, return an error Not found with a status code 404
-   * Otherwise:
-   * By using the module mime-types, get the MIME-type based on the name of the file
    * Return the content of the file with the correct MIME-type
    */
   static async getFile(request, response) {
@@ -195,8 +184,10 @@ class FilesController {
       _id: ObjectId(fileId),
     });
 
+    // Check if file exists
     if (!file || !fileUtils.isOwnerAndPublic(file, userId)) { return response.status(404).send({ error: 'Not found' }); }
 
+    // Check if the file is a folder
     if (file.type === 'folder') {
       return response
         .status(400)
