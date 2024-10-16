@@ -23,7 +23,7 @@ function controllerRouting(app) {
 
   // User Controller
 
-  // should create a new user in DB
+  // Add the route for creating a new user in DB
   router.post('/users', (req, res) => {
     UsersController.postNew(req, res);
   });
