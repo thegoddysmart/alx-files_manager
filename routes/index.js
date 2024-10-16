@@ -33,7 +33,7 @@ function controllerRouting(app) {
     UsersController.getMe(req, res);
   });
 
-  // Auth Controller
+  // Auth Controller - Add routes for authentication
 
   // should sign-in the user by generating a new authentication token
   router.get('/connect', (req, res) => {
