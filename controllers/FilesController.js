@@ -20,6 +20,8 @@ class FilesController {
     if (!basicUtils.isValidId(userId)) {
       return response.status(401).send({ error: 'Unauthorized' });
     }
+
+    // If file is an image, add it to the queue
     if (!userId && request.body.type === 'image') {
       await fileQueue.add({});
     }
